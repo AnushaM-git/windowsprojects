@@ -35,5 +35,11 @@ pipeline{
                 }
             }
         }
+        stage("Email_Notification"){
+            steps{
+                mail bcc: '', body: '''Hi Anusha,
+                JOB_NAME:BUILD_NUMBER ''', cc: '', from: '', replyTo: '', subject: 'Jenkins job results with $BUILD_NUMBER', to: 'anusha4a4@gmail.com'
+            }
+        }
      }       
 }
