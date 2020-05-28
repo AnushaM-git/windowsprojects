@@ -35,11 +35,12 @@ pipeline{
                 }
             }
         }
-        stage("Email_Notification"){
-            steps{
-                mail bcc: '', body: '''Hi Anusha,
-                ${env.JOB_NAME}:${env.BUILD_NUMBER} ''', cc: '', from: '', replyTo: '', subject: 'Jenkins job results with $BUILD_NUMBER', to: 'anusha4a4@gmail.com'
+        post {
+            always {
+               mail to: 'anusha4a4@gmail.com',
+                  subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+                  body: "${env.BUILD_URL} has result ${currentBuild.result}"
             }
-        }
+          }
      }       
 }
