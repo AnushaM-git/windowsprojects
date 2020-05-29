@@ -20,6 +20,19 @@ pipeline{
             steps{
                 bat "mvn clean package"
             }
+            post{
+                always{
+                    if (currentBuild.result = 'SUCCESS'){
+                        mail to: 'anusha4a4@gmail.com',
+                          subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+                          body: "${env.BUILD_URL} has result ${currentBuild.result}"
+                     else
+                         mail to: 'anusha4a4@gmail.com',
+                           subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+                           body: "${env.BUILD_URL} has result ${currentBuild.result}"
+                    }  
+                }
+            }
         }
         stage("SonarQube_analysis") {
             steps{
@@ -35,12 +48,5 @@ pipeline{
                 }
             }
         }
-        post {
-            always {
-               mail to: 'anusha4a4@gmail.com',
-                  subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-                  body: "${env.BUILD_URL} has result ${currentBuild.result}"
-            }
-          }
      }       
 }
