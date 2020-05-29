@@ -22,15 +22,10 @@ pipeline{
             }
             post{
                 always{
-                    if (currentBuild.result = 'SUCCESS'){
-                        mail to: 'anusha4a4@gmail.com',
-                          subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-                          body: "${env.BUILD_URL} has result ${currentBuild.result}"
-                     else
-                         mail to: 'anusha4a4@gmail.com',
-                           subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-                           body: "${env.BUILD_URL} has result ${currentBuild.result}"
-                    }  
+                    mail to: 'anusha4a4@gmail.com',
+                        subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+                        body: "${env.BUILD_URL} has result ${currentBuild.result}"
+                      
                 }
             }
         }
