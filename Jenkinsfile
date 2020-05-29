@@ -27,6 +27,9 @@ pipeline{
                         body: "${env.BUILD_URL} has result ${currentBuild.result}"
                       
                 }
+                failure{
+                    emailext attachLog: true, attachmentsPattern: "$JOB_NAME : $BUILD_NUMBER", body: "${env.BUILD_URL} has result ${currentBuild.result}", subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'anusha4a4@gmail.com'
+                }
             }
         }
         stage("SonarQube_analysis") {
