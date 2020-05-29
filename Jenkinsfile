@@ -18,7 +18,7 @@ pipeline{
         }
         stage("maven_build"){
             steps{
-                bat "mvn clean package"
+                bat "mvn clean packages"
             }
             post{
                 always{
